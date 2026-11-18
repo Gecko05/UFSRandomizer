@@ -32,3 +32,6 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # Finder (MacOS) folder config
 .DS_Store
+
+# official artwork press kit (large originals; only resized web copies get committed)
+under-falling-skies-artworks/
