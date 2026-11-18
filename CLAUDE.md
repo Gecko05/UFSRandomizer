@@ -21,20 +21,24 @@ so players can start a varied game with one click.
 ### Domain
 
 A setup randomizes:
-- **City** — and whether it starts damaged or undamaged
-- **Special tiles**
-- **Threat level** (difficulty) — and which sky tile is flipped
+- **City** — and whether it is damaged
+- **Sky** — for each of the 4 sky tiles: the tile or its special sky tile, and whether
+  it is flipped
 - **Character** — and whether it is upgraded
-- **Scenario**
+- **Scenario** — optional
 
-Target setup shape:
+Stars: black stars add difficulty, yellow stars lower it. Difficulty = black − yellow;
+complexity = black + yellow. Scenario: 1 black. Sky tile: 0 black, 1 flipped. Special
+sky tile: 1 black, 2 flipped. Damaged city: 0.5 yellow. Character: 0.5 yellow, 1
+upgraded. Tile stars live in `content.ts`, the others in `src/data/rules.ts`.
+
+Setup shape (`Setup` in `src/randomizer/setup.ts`):
 
 ```json
 {
-  "city": "moscow",
-  "difficulty": 2,
-  "skyThreat": [0, 1],
-  "character": { "id": "jackson", "upgraded": false },
+  "city": { "id": "moscow", "damaged": true },
+  "sky": [{ "skyTileId": "sky-tile-1", "tileId": "special-sky-tile-1", "special": true, "flipped": false }],
+  "character": { "id": "jackson-moss", "upgraded": false },
   "scenario": "evacuation"
 }
 ```
@@ -80,7 +84,14 @@ Target setup shape:
   has a blank one, or uses an id not in the content list.
   **To add a language:** copy `languages/en.ts` to `languages/<code>.ts`, translate it,
   and add it to `languages` in `index.ts`.
-- `src/components/` — React components (e.g. `Footer` with the fan-tool disclaimer).
+- `src/data/rules.ts` — star rules that aren't per item (scenario, damaged city,
+  character).
+- `src/randomizer/setup.ts` — pure functions: `randomSetup(content, random)` builds a
+  setup from a random source (`Math.random` in the app, fixed values in tests);
+  `setupStars(setup, content)` counts its stars, difficulty and complexity.
+- `src/components/` — React components: `SetupView` shows a setup and its stars,
+  `Footer` has the fan-tool disclaimer. `App.tsx` holds the Randomize button and the
+  current setup. Interface text is English only for now.
 - `under-falling-skies-artworks/` — official press-kit artwork, **git-ignored** (157 MB of
   originals). Commit only resized web copies under `src/`.
 
