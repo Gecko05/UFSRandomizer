@@ -11,12 +11,9 @@ import type { GameContent } from "./types";
  * - Every category has at least one item.
  * - Sky and special tiles: `blackStars` are whole numbers, 0 or more, and flipping
  *   never lowers them. Each special tile `replaces` a different, existing sky tile.
- * - `difficulty.min` <= `difficulty.max`, both whole numbers.
  *
  * When you add or remove an item, add or remove its name in every language file
  * (i18n tests fail until you do).
- *
- * All categories hold the real game content. `difficulty` is still a PLACEHOLDER range.
  */
 export const content: GameContent = {
   cities: [
@@ -104,5 +101,4 @@ export const content: GameContent = {
       blackStars: { normal: 1, flipped: 2 },
     },
   ],
-  difficulty: { min: 0, max: 4 },
 };
