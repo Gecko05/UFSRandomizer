@@ -30,6 +30,11 @@ describe("content list", () => {
     expect(count("promo")).toBe(5);
   });
 
+  test("has the game's 12 characters, none of them promos", () => {
+    expect(content.characters.length).toBe(12);
+    expect(content.characters.every((character) => character.source === "base")).toBe(true);
+  });
+
   test("difficulty range is whole numbers with min <= max", () => {
     const { min, max } = content.difficulty;
     expect(Number.isInteger(min)).toBe(true);

@@ -1,7 +1,7 @@
 import type { LanguageDefinition } from "../types";
 
-// City names are from the Spanish edition (promo cities translated).
-// The other categories are still PLACEHOLDER names.
+// City and character names and character tags are from the Spanish edition (promo
+// cities translated). The other categories are still PLACEHOLDER names.
 export const es: LanguageDefinition = {
   label: "Español",
   contentNames: {
@@ -30,10 +30,18 @@ export const es: LanguageDefinition = {
       berlin: "Berlín",
     },
     characters: {
-      "placeholder-character-1": "Personaje de ejemplo 1",
-      "placeholder-character-2": "Personaje de ejemplo 2",
-      "placeholder-character-3": "Personaje de ejemplo 3",
-      "placeholder-promo-character": "Personaje promocional de ejemplo",
+      "jackson-moss": "Jackson Moss",
+      "clinton-harper": "Clinton Harper",
+      "samantha-legrand": "Samantha Legrand",
+      "lucia-ortega": "Lucía Ortega",
+      "karima-almasi": "Karima Almasi",
+      "shanti-aumann": "Shanti Aumann",
+      "jaroslav-ruzicka": "Jaroslav Růžička",
+      "pietr-bernstein": "Pietr Bernstein",
+      izox: "Iz'ox",
+      "archie-bell": "Archie Bell",
+      "jang-chanwook": "Jang Chanwook",
+      "wang-lin": "Wang Lin",
     },
     scenarios: {
       "placeholder-scenario-1": "Escenario de ejemplo 1",
@@ -44,5 +52,22 @@ export const es: LanguageDefinition = {
       "placeholder-special-tile-1": "Loseta especial de ejemplo 1",
       "placeholder-special-tile-2": "Loseta especial de ejemplo 2",
     },
+  },
+  characterTags: {
+    "jackson-moss": { regular: "Coronel", upgraded: "General" },
+    "clinton-harper": { regular: "Piloto", upgraded: "As" },
+    "samantha-legrand": { regular: "Reportera", upgraded: "Periodista" },
+    "lucia-ortega": { regular: "Mecánica", upgraded: "Técnica" },
+    "karima-almasi": { regular: "Gerente", upgraded: "Directora de RRHH" },
+    "shanti-aumann": { regular: "Política", upgraded: "Ministro de Defensa" },
+    "jaroslav-ruzicka": { regular: "Programador", upgraded: "Ingeniero de software" },
+    "pietr-bernstein": { regular: "Ingeniero", upgraded: "Jefe de ingeniería" },
+    izox: { regular: "Alienígena", upgraded: "Líder de la resistencia" },
+    "archie-bell": {
+      regular: "Fundador de Bell Robotics",
+      upgraded: "Director general de Bell Robotics",
+    },
+    "jang-chanwook": { regular: "Jugador", upgraded: "Jugador profesional" },
+    "wang-lin": { regular: "Científico", upgraded: "Investigador principal" },
   },
 };

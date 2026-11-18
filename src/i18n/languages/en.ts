@@ -1,6 +1,7 @@
 import type { LanguageDefinition } from "../types";
 
-// City names are final. The other categories are still PLACEHOLDER names.
+// City and character names and character tags are final. The other categories are
+// still PLACEHOLDER names.
 export const en: LanguageDefinition = {
   label: "English",
   contentNames: {
@@ -29,10 +30,18 @@ export const en: LanguageDefinition = {
       berlin: "Berlin",
     },
     characters: {
-      "placeholder-character-1": "Placeholder Character 1",
-      "placeholder-character-2": "Placeholder Character 2",
-      "placeholder-character-3": "Placeholder Character 3",
-      "placeholder-promo-character": "Placeholder Promo Character",
+      "jackson-moss": "Jackson Moss",
+      "clinton-harper": "Clinton Harper",
+      "samantha-legrand": "Samantha Legrand",
+      "lucia-ortega": "Lucía Ortega",
+      "karima-almasi": "Karima Almasi",
+      "shanti-aumann": "Shanti Aumann",
+      "jaroslav-ruzicka": "Jaroslav Růžička",
+      "pietr-bernstein": "Pietr Bernstein",
+      izox: "Iz'ox",
+      "archie-bell": "Archie Bell",
+      "jang-chanwook": "Jang Chanwook",
+      "wang-lin": "Wang Lin",
     },
     scenarios: {
       "placeholder-scenario-1": "Placeholder Scenario 1",
@@ -43,5 +52,19 @@ export const en: LanguageDefinition = {
       "placeholder-special-tile-1": "Placeholder Special Tile 1",
       "placeholder-special-tile-2": "Placeholder Special Tile 2",
     },
+  },
+  characterTags: {
+    "jackson-moss": { regular: "Colonel", upgraded: "General" },
+    "clinton-harper": { regular: "Pilot", upgraded: "Ace" },
+    "samantha-legrand": { regular: "Reporter", upgraded: "Journalist" },
+    "lucia-ortega": { regular: "Mechanic", upgraded: "Technician" },
+    "karima-almasi": { regular: "Manager", upgraded: "HR Director" },
+    "shanti-aumann": { regular: "Politician", upgraded: "Defense Minister" },
+    "jaroslav-ruzicka": { regular: "Programmer", upgraded: "Software Engineer" },
+    "pietr-bernstein": { regular: "Engineer", upgraded: "Chief Engineer" },
+    izox: { regular: "Alien", upgraded: "Resistance Leader" },
+    "archie-bell": { regular: "Founder of Bell Robotics", upgraded: "CEO of Bell Robotics" },
+    "jang-chanwook": { regular: "Player", upgraded: "Pro Player" },
+    "wang-lin": { regular: "Scientist", upgraded: "Lead Researcher" },
   },
 };

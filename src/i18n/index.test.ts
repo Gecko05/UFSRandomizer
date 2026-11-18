@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { content } from "../data/content";
 import { contentCategories } from "../data/types";
-import { contentName, languages } from "./index";
+import { characterTag, contentName, languages } from "./index";
 
 /** Problems in one category's name table, counting only the table's own entries. */
 function findNameProblems(names: Readonly<Record<string, string>>, contentIds: readonly string[]) {
@@ -47,8 +47,35 @@ describe("language definitions", () => {
           });
         });
       }
+
+      for (const side of ["regular", "upgraded"] as const) {
+        test(`tags every character's ${side} side, with no blank tags or unknown ids`, () => {
+          const characterIds = content.characters.map((item) => item.id);
+          const tags = Object.fromEntries(
+            Object.entries(language.characterTags).map(([id, tag]) => [id, tag[side]]),
+          );
+          expect(findNameProblems(tags, characterIds)).toEqual({
+            missing: [],
+            blank: [],
+            unknown: [],
+          });
+        });
+      }
     });
   }
+});
+
+describe("characterTag", () => {
+  test("returns the regular or upgraded tag in the requested language", () => {
+    expect(characterTag("es", "jackson-moss", false)).toBe("Coronel");
+    expect(characterTag("es", "jackson-moss", true)).toBe("General");
+    expect(characterTag("en", "jang-chanwook", false)).toBe("Player");
+    expect(characterTag("en", "jang-chanwook", true)).toBe("Pro Player");
+  });
+
+  test.each(["nobody", "constructor", "__proto__"])("throws for unknown id %p", (id) => {
+    expect(() => characterTag("en", id, false)).toThrow(`Missing "en" tags for character "${id}"`);
+  });
 });
 
 describe("contentName", () => {

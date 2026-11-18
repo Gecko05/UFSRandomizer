@@ -14,7 +14,8 @@ import type { GameContent } from "./types";
  * When you add or remove an item, add or remove its name in every language file
  * (i18n tests fail until you do).
  *
- * Cities are the real game content; the other categories are still PLACEHOLDER data.
+ * Cities and characters are the real game content; the other categories are still
+ * PLACEHOLDER data.
  */
 export const content: GameContent = {
   cities: [
@@ -42,10 +43,18 @@ export const content: GameContent = {
     { id: "berlin", source: "promo" },
   ],
   characters: [
-    { id: "placeholder-character-1", source: "base" },
-    { id: "placeholder-character-2", source: "base" },
-    { id: "placeholder-character-3", source: "base" },
-    { id: "placeholder-promo-character", source: "promo" },
+    { id: "jackson-moss", source: "base" },
+    { id: "clinton-harper", source: "base" },
+    { id: "samantha-legrand", source: "base" },
+    { id: "lucia-ortega", source: "base" },
+    { id: "karima-almasi", source: "base" },
+    { id: "shanti-aumann", source: "base" },
+    { id: "jaroslav-ruzicka", source: "base" },
+    { id: "pietr-bernstein", source: "base" },
+    { id: "izox", source: "base" },
+    { id: "archie-bell", source: "base" },
+    { id: "jang-chanwook", source: "base" },
+    { id: "wang-lin", source: "base" },
   ],
   scenarios: [
     { id: "placeholder-scenario-1", source: "base" },
