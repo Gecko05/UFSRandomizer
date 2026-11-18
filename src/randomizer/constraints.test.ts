@@ -7,7 +7,7 @@ import {
   findRandomSetup,
   possibleStars,
 } from "./constraints";
-import { setupStars, type RandomSource } from "./setup";
+import { randomSetup, setupStars, type RandomSource } from "./setup";
 
 /** Small seeded random source (mulberry32), so tests are repeatable. */
 function seeded(seed: number): RandomSource {
@@ -34,6 +34,16 @@ describe("possibleStars", () => {
     expect(stars.length).toBe(30);
     expect(stars).toContainEqual({ black: 0, yellow: 0.5, difficulty: -0.5, complexity: 0.5 });
     expect(stars).toContainEqual({ black: 9, yellow: 1.5, difficulty: 7.5, complexity: 10.5 });
+  });
+
+  test("matches the stars of real setups exactly (no missing or impossible combination)", () => {
+    const key = (stars: { black: number; yellow: number }) => `${stars.black}/${stars.yellow}`;
+    const random = seeded(6);
+    const seen = new Set<string>();
+    for (let i = 0; i < 200_000; i++) {
+      seen.add(key(setupStars(randomSetup(content, random), content)));
+    }
+    expect([...seen].sort()).toEqual(possibleStars(content).map(key).sort());
   });
 });
 
@@ -87,8 +97,8 @@ describe("findRandomSetup", () => {
 });
 
 describe("chooseSetup", () => {
-  test("totally random (no choice) gives any setup", () => {
-    expect(chooseSetup(content, seeded(4), null)).not.toBeNull();
+  test("totally random (no choice) takes the first setup drawn, with no filter", () => {
+    expect(chooseSetup(content, () => 0, null)).toEqual(randomSetup(content, () => 0));
   });
 
   test("keeps the complexity exact and the difficulty inside the range", () => {
