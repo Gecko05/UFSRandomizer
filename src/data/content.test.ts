@@ -66,6 +66,15 @@ describe("content list", () => {
         Array(4).fill({ normal: 1, flipped: 2 }),
       );
     });
+
+    test("match the game: special sky tile N replaces sky tile N", () => {
+      expect(content.specialTiles.map((tile) => [tile.id, tile.replaces])).toEqual([
+        ["special-sky-tile-1", "sky-tile-1"],
+        ["special-sky-tile-2", "sky-tile-2"],
+        ["special-sky-tile-3", "sky-tile-3"],
+        ["special-sky-tile-4", "sky-tile-4"],
+      ]);
+    });
   });
 
   test("difficulty range is whole numbers with min <= max", () => {
