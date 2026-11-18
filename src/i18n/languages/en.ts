@@ -5,6 +5,13 @@ import type { LanguageDefinition } from "../types";
 // Sky tiles are numbered for now.
 export const en: LanguageDefinition = {
   label: "English",
+  categoryLabels: {
+    cities: "Cities",
+    characters: "Characters",
+    scenarios: "Scenarios",
+    skyTiles: "Sky tiles",
+    specialTiles: "Special sky tiles",
+  },
   contentNames: {
     cities: {
       washington: "Washington, DC",

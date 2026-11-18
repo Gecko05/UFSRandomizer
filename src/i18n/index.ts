@@ -11,6 +11,11 @@ export const languages = { en, es } satisfies Record<string, LanguageDefinition>
 
 export type LanguageCode = keyof typeof languages;
 
+/** Title of a content type in the given language (e.g. "Ciudades"). */
+export function categoryLabel(language: LanguageCode, category: ContentCategory): string {
+  return languages[language].categoryLabels[category];
+}
+
 /** Display name of a content item in the given language. Throws for an id the language doesn't name. */
 export function contentName(language: LanguageCode, category: ContentCategory, id: string): string {
   const names = languages[language].contentNames[category];

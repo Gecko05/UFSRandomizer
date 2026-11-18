@@ -72,11 +72,12 @@ Target setup shape:
   `content.test.ts` enforces its rules (unique kebab-case ids, non-empty categories,
   valid tile stars, one special tile per sky tile, valid difficulty range).
 - `src/i18n/` — languages. `languages/<code>.ts` holds one language's definition (its
-  `label`, the display names of every content item, and each character's regular and
-  upgraded tag, keyed by id); `index.ts` is the registry (`languages`) and the
+  `label`, a label for each content type, the display names of every content item,
+  and each character's regular and upgraded tag, keyed by id); `index.ts` is the
+  registry (`languages`) and the `categoryLabel(language, category)`,
   `contentName(language, category, id)` and `characterTag(language, id, upgraded)`
-  lookups. `index.test.ts` fails if a registered language misses a name or tag, has a
-  blank one, or uses an id not in the content list.
+  lookups. `index.test.ts` fails if a registered language misses a label, name or tag,
+  has a blank one, or uses an id not in the content list.
   **To add a language:** copy `languages/en.ts` to `languages/<code>.ts`, translate it,
   and add it to `languages` in `index.ts`.
 - `src/components/` — React components (e.g. `Footer` with the fan-tool disclaimer).

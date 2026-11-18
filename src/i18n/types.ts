@@ -13,6 +13,8 @@ export interface CharacterTags {
 export interface LanguageDefinition {
   /** The language's own name for itself, shown in a language picker (e.g. "Español"). */
   label: string;
+  /** Title of each content type, shown to players (e.g. "Ciudades"). */
+  categoryLabels: Readonly<Record<ContentCategory, string>>;
   contentNames: ContentNames;
   /** Character tags, keyed by character id. */
   characterTags: Readonly<Record<string, CharacterTags>>;
