@@ -76,11 +76,4 @@ describe("content list", () => {
       ]);
     });
   });
-
-  test("difficulty range is whole numbers with min <= max", () => {
-    const { min, max } = content.difficulty;
-    expect(Number.isInteger(min)).toBe(true);
-    expect(Number.isInteger(max)).toBe(true);
-    expect(min).toBeLessThanOrEqual(max);
-  });
 });

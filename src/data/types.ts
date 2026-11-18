@@ -37,12 +37,6 @@ export interface SpecialTile extends ContentItem {
   blackStars: BlackStars;
 }
 
-/** Inclusive range of threat levels (difficulty) the game offers. */
-export interface DifficultyRange {
-  min: number;
-  max: number;
-}
-
 /** All content available for randomization. */
 export interface GameContent {
   cities: readonly City[];
@@ -50,11 +44,10 @@ export interface GameContent {
   scenarios: readonly Scenario[];
   skyTiles: readonly SkyTile[];
   specialTiles: readonly SpecialTile[];
-  difficulty: DifficultyRange;
 }
 
-/** The categories of selectable content items. */
-export type ContentCategory = Exclude<keyof GameContent, "difficulty">;
+/** The categories of content items. */
+export type ContentCategory = keyof GameContent;
 
 // `satisfies` makes the compiler reject a missing or unknown category here.
 const categoryKeys = {

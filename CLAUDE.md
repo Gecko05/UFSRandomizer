@@ -69,12 +69,11 @@ Setup shape (`Setup` in `src/randomizer/setup.ts`):
   it through the HTML import.
 - `build.ts` — production bundle of `src/**/*.html` into `dist/`.
 - `src/data/content.ts` — the game's content list (cities, characters, scenarios,
-  sky tiles, special sky tiles, difficulty range): language-independent data only
-  (`id`, `source`; tiles also have `blackStars` per side, and each special tile
-  `replaces` one sky tile). Maintained by hand by the product owner; all categories
-  are real, the difficulty range is still a placeholder. Types in `src/data/types.ts`;
+  sky tiles, special sky tiles): language-independent data only (`id`, `source`;
+  tiles also have `blackStars` per side, and each special tile `replaces` one sky
+  tile). Maintained by hand by the product owner. Types in `src/data/types.ts`;
   `content.test.ts` enforces its rules (unique kebab-case ids, non-empty categories,
-  valid tile stars, one special tile per sky tile, valid difficulty range).
+  valid tile stars, one special tile per sky tile).
 - `src/i18n/` — languages. `languages/<code>.ts` holds one language's definition (its
   `label`, a label for each content type, the display names of every content item,
   and each character's regular and upgraded tag, keyed by id); `index.ts` is the
@@ -90,13 +89,19 @@ Setup shape (`Setup` in `src/randomizer/setup.ts`):
   setup from a random source (`Math.random` in the app, fixed values in tests);
   `setupStars(setup, content)` counts its stars, difficulty and complexity.
 - `src/randomizer/constraints.ts` — player choices on top of the randomizer:
-  `complexityOptions(content)` (every possible complexity) and
-  `findRandomSetup(content, random, fits)`, which draws random setups until one's stars
-  pass `fits`, so every fitting setup is equally likely; returns `null` if none fits.
-- `src/components/` — React components: `SetupView` shows a setup and its stars,
-  `Footer` has the fan-tool disclaimer. `App.tsx` holds the complexity picker ("Totally
-  random" or an exact value), the Randomize button and the result. Interface text is
-  English only for now.
+  - `possibleStars(content)`: every black/yellow star combination a setup can have.
+  - `complexityOptions(content)` and `difficultyOptions(content, complexity)`: what the
+    player can pick (difficulty from the lowest possible up to the complexity).
+  - `findRandomSetup(content, random, fits)`: returns `null` at once if no star
+    combination fits; otherwise draws random setups until one fits, so every fitting
+    setup is equally likely.
+  - `chooseSetup(content, random, choice)`: a setup for a `SetupChoice` (exact
+    complexity + difficulty range), or totally random when `choice` is `null`.
+- `src/components/` — React components: `ChoicePicker` (complexity: "Totally random" or
+  an exact value; then a difficulty range), `ResultView` (the setup, or "No setup fits
+  these choices."), `SetupView` (a setup and its stars), `Footer` (fan-tool
+  disclaimer). `App.tsx` holds the choice, the Randomize button and the result.
+  Interface text is English only for now.
 - `under-falling-skies-artworks/` — official press-kit artwork, **git-ignored** (157 MB of
   originals). Commit only resized web copies under `src/`.
 
