@@ -1,7 +1,8 @@
 import type { LanguageDefinition } from "../types";
 
-// City, character and scenario names and character tags are final. Special tiles are
-// still PLACEHOLDER names.
+// City and character names are final. Scenario names and character tags are
+// translations from the Spanish edition, not yet checked against the English cards.
+// Special tiles are still PLACEHOLDER names.
 export const en: LanguageDefinition = {
   label: "English",
   contentNames: {
