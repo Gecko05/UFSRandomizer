@@ -1,15 +1,11 @@
 import { describe, expect, test } from "bun:test";
 import { content } from "./content";
-
-const categories = {
-  cities: content.cities,
-  characters: content.characters,
-  scenarios: content.scenarios,
-  specialTiles: content.specialTiles,
-};
+import { contentCategories } from "./types";
 
 describe("content list", () => {
-  for (const [category, items] of Object.entries(categories)) {
+  for (const category of contentCategories) {
+    const items = content[category];
+
     describe(category, () => {
       test("has at least one item", () => {
         expect(items.length).toBeGreaterThan(0);
@@ -24,12 +20,6 @@ describe("content list", () => {
       test("ids are unique", () => {
         const ids = items.map((item) => item.id);
         expect(new Set(ids).size).toBe(ids.length);
-      });
-
-      test("names are not blank", () => {
-        for (const item of items) {
-          expect(item.name.trim()).not.toBe("");
-        }
       });
     });
   }

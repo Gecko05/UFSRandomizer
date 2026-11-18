@@ -1,12 +1,13 @@
 /** Where a piece of content comes from: the base game box or a promo. */
 export type ContentSource = "base" | "promo";
 
-/** One selectable item in a content category (a city, a character…). */
+/**
+ * One selectable item in a content category (a city, a character…).
+ * Display names are per language, in `src/i18n/languages/`.
+ */
 export interface ContentItem {
   /** Stable identifier, lowercase kebab-case (e.g. "jackson-moss"). Must stay stable. */
   id: string;
-  /** Display name shown to players. */
-  name: string;
   source: ContentSource;
 }
 
@@ -35,3 +36,13 @@ export interface GameContent {
   specialTiles: readonly SpecialTile[];
   difficulty: DifficultyRange;
 }
+
+/** The categories of selectable content items. */
+export type ContentCategory = Exclude<keyof GameContent, "difficulty">;
+
+export const contentCategories: readonly ContentCategory[] = [
+  "cities",
+  "characters",
+  "scenarios",
+  "specialTiles",
+];
