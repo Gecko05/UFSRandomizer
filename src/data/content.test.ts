@@ -35,6 +35,11 @@ describe("content list", () => {
     expect(content.characters.every((character) => character.source === "base")).toBe(true);
   });
 
+  test("has the game's 13 scenarios, none of them promos", () => {
+    expect(content.scenarios.length).toBe(13);
+    expect(content.scenarios.every((scenario) => scenario.source === "base")).toBe(true);
+  });
+
   test("difficulty range is whole numbers with min <= max", () => {
     const { min, max } = content.difficulty;
     expect(Number.isInteger(min)).toBe(true);

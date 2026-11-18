@@ -1,6 +1,6 @@
 import type { LanguageDefinition } from "../types";
 
-// City and character names and character tags are final. The other categories are
+// City, character and scenario names and character tags are final. Special tiles are
 // still PLACEHOLDER names.
 export const en: LanguageDefinition = {
   label: "English",
@@ -44,9 +44,19 @@ export const en: LanguageDefinition = {
       "wang-lin": "Wang Lin",
     },
     scenarios: {
-      "placeholder-scenario-1": "Placeholder Scenario 1",
-      "placeholder-scenario-2": "Placeholder Scenario 2",
-      "placeholder-promo-scenario": "Placeholder Promo Scenario",
+      "fire-in-the-sky": "Fire in the Sky",
+      evacuation: "Evacuation",
+      "reactor-leak": "Reactor Leak",
+      reinforcements: "Reinforcements",
+      satellites: "Satellites",
+      "the-saboteur": "The Saboteur",
+      contamination: "Contamination",
+      "base-repair": "Base Repair",
+      "a-risky-investigation": "A Risky Investigation",
+      "the-storm": "The Storm",
+      "the-command-ship": "The Command Ship",
+      "kamikaze-ships": "Kamikaze Ships",
+      "the-final-battle": "The Final Battle",
     },
     specialTiles: {
       "placeholder-special-tile-1": "Placeholder Special Tile 1",

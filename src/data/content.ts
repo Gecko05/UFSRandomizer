@@ -14,7 +14,7 @@ import type { GameContent } from "./types";
  * When you add or remove an item, add or remove its name in every language file
  * (i18n tests fail until you do).
  *
- * Cities and characters are the real game content; the other categories are still
+ * Cities, characters and scenarios are the real game content; special tiles are still
  * PLACEHOLDER data.
  */
 export const content: GameContent = {
@@ -57,9 +57,19 @@ export const content: GameContent = {
     { id: "wang-lin", source: "base" },
   ],
   scenarios: [
-    { id: "placeholder-scenario-1", source: "base" },
-    { id: "placeholder-scenario-2", source: "base" },
-    { id: "placeholder-promo-scenario", source: "promo" },
+    { id: "fire-in-the-sky", source: "base" },
+    { id: "evacuation", source: "base" },
+    { id: "reactor-leak", source: "base" },
+    { id: "reinforcements", source: "base" },
+    { id: "satellites", source: "base" },
+    { id: "the-saboteur", source: "base" },
+    { id: "contamination", source: "base" },
+    { id: "base-repair", source: "base" },
+    { id: "a-risky-investigation", source: "base" },
+    { id: "the-storm", source: "base" },
+    { id: "the-command-ship", source: "base" },
+    { id: "kamikaze-ships", source: "base" },
+    { id: "the-final-battle", source: "base" },
   ],
   specialTiles: [
     { id: "placeholder-special-tile-1", source: "base" },
