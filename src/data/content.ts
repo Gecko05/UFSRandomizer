@@ -14,14 +14,32 @@ import type { GameContent } from "./types";
  * When you add or remove an item, add or remove its name in every language file
  * (i18n tests fail until you do).
  *
- * Everything below is PLACEHOLDER data.
+ * Cities are the real game content; the other categories are still PLACEHOLDER data.
  */
 export const content: GameContent = {
   cities: [
-    { id: "placeholder-city-1", source: "base" },
-    { id: "placeholder-city-2", source: "base" },
-    { id: "placeholder-city-3", source: "base" },
-    { id: "placeholder-promo-city", source: "promo" },
+    { id: "washington", source: "base" },
+    { id: "roswell", source: "base" },
+    { id: "new-york", source: "base" },
+    { id: "mexico-city", source: "base" },
+    { id: "havana", source: "base" },
+    { id: "montreal", source: "base" },
+    { id: "rio-de-janeiro", source: "base" },
+    { id: "london", source: "base" },
+    { id: "cairo", source: "base" },
+    { id: "moscow", source: "base" },
+    { id: "johannesburg", source: "base" },
+    { id: "paris", source: "base" },
+    { id: "sydney", source: "base" },
+    { id: "tokyo", source: "base" },
+    { id: "seoul", source: "base" },
+    { id: "beijing", source: "base" },
+    { id: "singapore", source: "base" },
+    { id: "kyiv", source: "promo" },
+    { id: "essen", source: "promo" },
+    { id: "cullompton", source: "promo" },
+    { id: "prague", source: "promo" },
+    { id: "berlin", source: "promo" },
   ],
   characters: [
     { id: "placeholder-character-1", source: "base" },

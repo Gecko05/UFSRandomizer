@@ -53,8 +53,8 @@ describe("language definitions", () => {
 
 describe("contentName", () => {
   test("returns the name in the requested language", () => {
-    expect(contentName("es", "cities", "placeholder-city-1")).toBe("Ciudad de ejemplo 1");
-    expect(contentName("en", "cities", "placeholder-city-1")).toBe("Placeholder City 1");
+    expect(contentName("es", "cities", "mexico-city")).toBe("Ciudad de México");
+    expect(contentName("en", "cities", "mexico-city")).toBe("Mexico City");
   });
 
   test("throws for an unknown id", () => {
