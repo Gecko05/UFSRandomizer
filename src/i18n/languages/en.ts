@@ -2,7 +2,7 @@ import type { LanguageDefinition } from "../types";
 
 // City and character names are final. Scenario names and character tags are
 // translations from the Spanish edition, not yet checked against the English cards.
-// Special tiles are still PLACEHOLDER names.
+// Sky tiles are numbered for now.
 export const en: LanguageDefinition = {
   label: "English",
   contentNames: {
@@ -59,9 +59,17 @@ export const en: LanguageDefinition = {
       "kamikaze-ships": "Kamikaze Ships",
       "the-final-battle": "The Final Battle",
     },
+    skyTiles: {
+      "sky-tile-1": "Sky tile 1",
+      "sky-tile-2": "Sky tile 2",
+      "sky-tile-3": "Sky tile 3",
+      "sky-tile-4": "Sky tile 4",
+    },
     specialTiles: {
-      "placeholder-special-tile-1": "Placeholder Special Tile 1",
-      "placeholder-special-tile-2": "Placeholder Special Tile 2",
+      "special-sky-tile-1": "Special sky tile 1",
+      "special-sky-tile-2": "Special sky tile 2",
+      "special-sky-tile-3": "Special sky tile 3",
+      "special-sky-tile-4": "Special sky tile 4",
     },
   },
   characterTags: {

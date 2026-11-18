@@ -40,6 +40,34 @@ describe("content list", () => {
     expect(content.scenarios.every((scenario) => scenario.source === "base")).toBe(true);
   });
 
+  describe("sky and special tiles", () => {
+    const tiles = [...content.skyTiles, ...content.specialTiles];
+
+    test("black stars are whole numbers, 0 or more, and flipping never lowers them", () => {
+      for (const { id, blackStars } of tiles) {
+        const { normal, flipped } = blackStars;
+        expect({ id, valid: Number.isInteger(normal) && Number.isInteger(flipped) }).toEqual({ id, valid: true });
+        expect({ id, valid: normal >= 0 && flipped >= normal }).toEqual({ id, valid: true });
+      }
+    });
+
+    test("each special tile replaces a different, existing sky tile", () => {
+      const skyTileIds = content.skyTiles.map((tile) => tile.id);
+      const replaced = content.specialTiles.map((tile) => tile.replaces);
+      expect(replaced.filter((id) => !skyTileIds.includes(id))).toEqual([]);
+      expect(new Set(replaced).size).toBe(replaced.length);
+    });
+
+    test("match the game: 4 sky tiles (0 / 1 black) and 4 special tiles (1 / 2 black)", () => {
+      expect(content.skyTiles.map((tile) => tile.blackStars)).toEqual(
+        Array(4).fill({ normal: 0, flipped: 1 }),
+      );
+      expect(content.specialTiles.map((tile) => tile.blackStars)).toEqual(
+        Array(4).fill({ normal: 1, flipped: 2 }),
+      );
+    });
+  });
+
   test("difficulty range is whole numbers with min <= max", () => {
     const { min, max } = content.difficulty;
     expect(Number.isInteger(min)).toBe(true);
