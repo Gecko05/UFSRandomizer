@@ -37,7 +37,7 @@ export function complexityOptions(content: GameContent): number[] {
  *
  * Draws random setups until one fits. Every setup is equally likely to be drawn, so
  * every setup that fits is equally likely to be returned. The rarest complexity
- * values fit about 1 setup in 15,000, so the default attempt limit is far above that.
+ * value (0.5) fits 1 setup in 14,336, so the default attempt limit is far above that.
  */
 export function findRandomSetup(
   content: GameContent,
