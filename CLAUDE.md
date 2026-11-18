@@ -89,9 +89,14 @@ Setup shape (`Setup` in `src/randomizer/setup.ts`):
 - `src/randomizer/setup.ts` — pure functions: `randomSetup(content, random)` builds a
   setup from a random source (`Math.random` in the app, fixed values in tests);
   `setupStars(setup, content)` counts its stars, difficulty and complexity.
+- `src/randomizer/constraints.ts` — player choices on top of the randomizer:
+  `complexityOptions(content)` (every possible complexity) and
+  `findRandomSetup(content, random, fits)`, which draws random setups until one's stars
+  pass `fits`, so every fitting setup is equally likely; returns `null` if none fits.
 - `src/components/` — React components: `SetupView` shows a setup and its stars,
-  `Footer` has the fan-tool disclaimer. `App.tsx` holds the Randomize button and the
-  current setup. Interface text is English only for now.
+  `Footer` has the fan-tool disclaimer. `App.tsx` holds the complexity picker ("Totally
+  random" or an exact value), the Randomize button and the result. Interface text is
+  English only for now.
 - `under-falling-skies-artworks/` — official press-kit artwork, **git-ignored** (157 MB of
   originals). Commit only resized web copies under `src/`.
 
