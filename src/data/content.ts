@@ -9,13 +9,14 @@ import type { GameContent } from "./types";
  *   code and language files refer to content by id.
  * - `source` is "base" for the base game box, "promo" for promo content.
  * - Every category has at least one item.
+ * - Sky and special tiles: `blackStars` are whole numbers, 0 or more, and flipping
+ *   never lowers them. Each special tile `replaces` a different, existing sky tile.
  * - `difficulty.min` <= `difficulty.max`, both whole numbers.
  *
  * When you add or remove an item, add or remove its name in every language file
  * (i18n tests fail until you do).
  *
- * Cities, characters and scenarios are the real game content; special tiles are still
- * PLACEHOLDER data.
+ * All categories hold the real game content. `difficulty` is still a PLACEHOLDER range.
  */
 export const content: GameContent = {
   cities: [
@@ -71,9 +72,37 @@ export const content: GameContent = {
     { id: "kamikaze-ships", source: "base" },
     { id: "the-final-battle", source: "base" },
   ],
+  skyTiles: [
+    { id: "sky-tile-1", source: "base", blackStars: { normal: 0, flipped: 1 } },
+    { id: "sky-tile-2", source: "base", blackStars: { normal: 0, flipped: 1 } },
+    { id: "sky-tile-3", source: "base", blackStars: { normal: 0, flipped: 1 } },
+    { id: "sky-tile-4", source: "base", blackStars: { normal: 0, flipped: 1 } },
+  ],
   specialTiles: [
-    { id: "placeholder-special-tile-1", source: "base" },
-    { id: "placeholder-special-tile-2", source: "base" },
+    {
+      id: "special-sky-tile-1",
+      source: "base",
+      replaces: "sky-tile-1",
+      blackStars: { normal: 1, flipped: 2 },
+    },
+    {
+      id: "special-sky-tile-2",
+      source: "base",
+      replaces: "sky-tile-2",
+      blackStars: { normal: 1, flipped: 2 },
+    },
+    {
+      id: "special-sky-tile-3",
+      source: "base",
+      replaces: "sky-tile-3",
+      blackStars: { normal: 1, flipped: 2 },
+    },
+    {
+      id: "special-sky-tile-4",
+      source: "base",
+      replaces: "sky-tile-4",
+      blackStars: { normal: 1, flipped: 2 },
+    },
   ],
   difficulty: { min: 0, max: 4 },
 };

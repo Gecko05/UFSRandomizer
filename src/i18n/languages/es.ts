@@ -1,7 +1,7 @@
 import type { LanguageDefinition } from "../types";
 
 // City, character and scenario names and character tags are from the Spanish edition
-// (promo cities translated). Special tiles are still PLACEHOLDER names.
+// (promo cities translated). Sky tiles are numbered for now.
 export const es: LanguageDefinition = {
   label: "Español",
   contentNames: {
@@ -58,9 +58,17 @@ export const es: LanguageDefinition = {
       "kamikaze-ships": "Naves Kamikaze",
       "the-final-battle": "La Batalla Final",
     },
+    skyTiles: {
+      "sky-tile-1": "Loseta de cielo 1",
+      "sky-tile-2": "Loseta de cielo 2",
+      "sky-tile-3": "Loseta de cielo 3",
+      "sky-tile-4": "Loseta de cielo 4",
+    },
     specialTiles: {
-      "placeholder-special-tile-1": "Loseta especial de ejemplo 1",
-      "placeholder-special-tile-2": "Loseta especial de ejemplo 2",
+      "special-sky-tile-1": "Loseta de cielo especial 1",
+      "special-sky-tile-2": "Loseta de cielo especial 2",
+      "special-sky-tile-3": "Loseta de cielo especial 3",
+      "special-sky-tile-4": "Loseta de cielo especial 4",
     },
   },
   characterTags: {

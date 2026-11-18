@@ -65,11 +65,12 @@ Target setup shape:
   it through the HTML import.
 - `build.ts` — production bundle of `src/**/*.html` into `dist/`.
 - `src/data/content.ts` — the game's content list (cities, characters, scenarios,
-  special tiles, difficulty range): language-independent data only (`id`, `source`).
-  Maintained by hand by the product owner; cities, characters and scenarios are real,
-  special tiles are still placeholder data. Types in `src/data/types.ts`;
+  sky tiles, special sky tiles, difficulty range): language-independent data only
+  (`id`, `source`; tiles also have `blackStars` per side, and each special tile
+  `replaces` one sky tile). Maintained by hand by the product owner; all categories
+  are real, the difficulty range is still a placeholder. Types in `src/data/types.ts`;
   `content.test.ts` enforces its rules (unique kebab-case ids, non-empty categories,
-  valid difficulty range).
+  valid tile stars, one special tile per sky tile, valid difficulty range).
 - `src/i18n/` — languages. `languages/<code>.ts` holds one language's definition (its
   `label`, the display names of every content item, and each character's regular and
   upgraded tag, keyed by id); `index.ts` is the registry (`languages`) and the
