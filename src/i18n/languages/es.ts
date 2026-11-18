@@ -1,14 +1,33 @@
 import type { LanguageDefinition } from "../types";
 
-// PLACEHOLDER names: replace with the Spanish edition's names.
+// City names are from the Spanish edition (promo cities translated).
+// The other categories are still PLACEHOLDER names.
 export const es: LanguageDefinition = {
   label: "Español",
   contentNames: {
     cities: {
-      "placeholder-city-1": "Ciudad de ejemplo 1",
-      "placeholder-city-2": "Ciudad de ejemplo 2",
-      "placeholder-city-3": "Ciudad de ejemplo 3",
-      "placeholder-promo-city": "Ciudad promocional de ejemplo",
+      washington: "Washington",
+      roswell: "Roswell",
+      "new-york": "Nueva York",
+      "mexico-city": "Ciudad de México",
+      havana: "La Habana",
+      montreal: "Montreal",
+      "rio-de-janeiro": "Río de Janeiro",
+      london: "Londres",
+      cairo: "El Cairo",
+      moscow: "Moscú",
+      johannesburg: "Johannesburgo",
+      paris: "París",
+      sydney: "Sídney",
+      tokyo: "Tokio",
+      seoul: "Seúl",
+      beijing: "Pekín",
+      singapore: "Singapur",
+      kyiv: "Kiev",
+      essen: "Essen",
+      cullompton: "Cullompton",
+      prague: "Praga",
+      berlin: "Berlín",
     },
     characters: {
       "placeholder-character-1": "Personaje de ejemplo 1",

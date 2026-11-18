@@ -1,14 +1,32 @@
 import type { LanguageDefinition } from "../types";
 
-// PLACEHOLDER names: replace with the English edition's names.
+// City names are final. The other categories are still PLACEHOLDER names.
 export const en: LanguageDefinition = {
   label: "English",
   contentNames: {
     cities: {
-      "placeholder-city-1": "Placeholder City 1",
-      "placeholder-city-2": "Placeholder City 2",
-      "placeholder-city-3": "Placeholder City 3",
-      "placeholder-promo-city": "Placeholder Promo City",
+      washington: "Washington, DC",
+      roswell: "Roswell",
+      "new-york": "New York",
+      "mexico-city": "Mexico City",
+      havana: "Havana",
+      montreal: "Montreal",
+      "rio-de-janeiro": "Rio de Janeiro",
+      london: "London",
+      cairo: "Cairo",
+      moscow: "Moscow",
+      johannesburg: "Johannesburg",
+      paris: "Paris",
+      sydney: "Sydney",
+      tokyo: "Tokyo",
+      seoul: "Seoul",
+      beijing: "Beijing",
+      singapore: "Singapore",
+      kyiv: "Kyiv",
+      essen: "Essen",
+      cullompton: "Cullompton",
+      prague: "Prague",
+      berlin: "Berlin",
     },
     characters: {
       "placeholder-character-1": "Placeholder Character 1",

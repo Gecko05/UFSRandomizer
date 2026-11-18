@@ -24,6 +24,12 @@ describe("content list", () => {
     });
   }
 
+  test("has the game's 17 base cities and 5 promo cities", () => {
+    const count = (source: string) => content.cities.filter((city) => city.source === source).length;
+    expect(count("base")).toBe(17);
+    expect(count("promo")).toBe(5);
+  });
+
   test("difficulty range is whole numbers with min <= max", () => {
     const { min, max } = content.difficulty;
     expect(Number.isInteger(min)).toBe(true);

@@ -66,9 +66,9 @@ Target setup shape:
 - `build.ts` — production bundle of `src/**/*.html` into `dist/`.
 - `src/data/content.ts` — the game's content list (cities, characters, scenarios,
   special tiles, difficulty range): language-independent data only (`id`, `source`).
-  Maintained by hand by the product owner; currently placeholder data. Types in
-  `src/data/types.ts`; `content.test.ts` enforces its rules (unique kebab-case ids,
-  non-empty categories, valid difficulty range).
+  Maintained by hand by the product owner; cities are real, other categories are
+  still placeholder data. Types in `src/data/types.ts`; `content.test.ts` enforces
+  its rules (unique kebab-case ids, non-empty categories, valid difficulty range).
 - `src/i18n/` — languages. `languages/<code>.ts` holds one language's definition (its
   `label` and the display names of every content item, keyed by id); `index.ts` is the
   registry (`languages`) and `contentName(language, category, id)` lookup.
