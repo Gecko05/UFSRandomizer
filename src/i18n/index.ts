@@ -21,3 +21,13 @@ export function contentName(language: LanguageCode, category: ContentCategory, i
   }
   return name;
 }
+
+/** A character's tag in the given language, for the regular or upgraded side. Throws for an unknown id. */
+export function characterTag(language: LanguageCode, id: string, upgraded: boolean): string {
+  const tags = languages[language].characterTags;
+  const tag = Object.hasOwn(tags, id) ? tags[id] : undefined;
+  if (tag === undefined) {
+    throw new Error(`Missing "${language}" tags for character "${id}"`);
+  }
+  return upgraded ? tag.upgraded : tag.regular;
+}
