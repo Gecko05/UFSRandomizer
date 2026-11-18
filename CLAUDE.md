@@ -65,9 +65,17 @@ Target setup shape:
   it through the HTML import.
 - `build.ts` — production bundle of `src/**/*.html` into `dist/`.
 - `src/data/content.ts` — the game's content list (cities, characters, scenarios,
-  special tiles, difficulty range). Maintained by hand by the product owner; currently
-  placeholder data. Types in `src/data/types.ts`; `content.test.ts` enforces its rules
-  (unique kebab-case ids, non-blank names, non-empty categories, valid difficulty range).
+  special tiles, difficulty range): language-independent data only (`id`, `source`).
+  Maintained by hand by the product owner; currently placeholder data. Types in
+  `src/data/types.ts`; `content.test.ts` enforces its rules (unique kebab-case ids,
+  non-empty categories, valid difficulty range).
+- `src/i18n/` — languages. `languages/<code>.ts` holds one language's definition (its
+  `label` and the display names of every content item, keyed by id); `index.ts` is the
+  registry (`languages`) and `contentName(language, category, id)` lookup.
+  `index.test.ts` fails if a registered language misses a name, has a blank name, or
+  names an id not in the content list.
+  **To add a language:** copy `languages/en.ts` to `languages/<code>.ts`, translate it,
+  and add it to `languages` in `index.ts`.
 - `src/components/` — React components (e.g. `Footer` with the fan-tool disclaimer).
 - `under-falling-skies-artworks/` — official press-kit artwork, **git-ignored** (157 MB of
   originals). Commit only resized web copies under `src/`.
@@ -89,6 +97,8 @@ Randomization runs entirely client-side. There is no backend logic yet.
 - 2026-11-18 — Client-side only randomizer, no persistence — nothing needs a server yet.
 - 2026-11-18 — The game has no expansions, only promos: each content item is tagged
   `source: "base" | "promo"`. Players select individual items per category.
+- 2026-11-18 — Multilanguage, starting with Spanish and English. Each language is one
+  self-contained definition file; display text never lives in the content list.
 - 2026-11-18 — Every page shows a footer stating this is an unofficial fan tool and that
   the game and artwork are © Czech Games Edition.
 
