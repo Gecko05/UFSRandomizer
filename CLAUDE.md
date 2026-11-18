@@ -64,6 +64,13 @@ Target setup shape:
 - `src/index.html` → `src/frontend.tsx` → `src/App.tsx` — the React app. Bun bundles
   it through the HTML import.
 - `build.ts` — production bundle of `src/**/*.html` into `dist/`.
+- `src/data/content.ts` — the game's content list (cities, characters, scenarios,
+  special tiles, difficulty range). Maintained by hand by the product owner; currently
+  placeholder data. Types in `src/data/types.ts`; `content.test.ts` enforces its rules
+  (unique kebab-case ids, non-empty categories, valid difficulty range).
+- `src/components/` — React components (e.g. `Footer` with the fan-tool disclaimer).
+- `under-falling-skies-artworks/` — official press-kit artwork, **git-ignored** (157 MB of
+  originals). Commit only resized web copies under `src/`.
 
 Randomization runs entirely client-side. There is no backend logic yet.
 
@@ -80,6 +87,10 @@ Randomization runs entirely client-side. There is no backend logic yet.
 
 <!-- One line per significant design decision, newest first. Spikes land here. -->
 - 2026-11-18 — Client-side only randomizer, no persistence — nothing needs a server yet.
+- 2026-11-18 — The game has no expansions, only promos: each content item is tagged
+  `source: "base" | "promo"`. Players select individual items per category.
+- 2026-11-18 — Every page shows a footer stating this is an unofficial fan tool and that
+  the game and artwork are © Czech Games Edition.
 
 ## Working a work item
 
