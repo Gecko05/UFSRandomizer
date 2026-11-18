@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { content } from "../data/content";
 import { contentCategories } from "../data/types";
-import { characterTag, contentName, languages } from "./index";
+import { categoryLabel, characterTag, contentName, languages } from "./index";
 
 /** Problems in one category's name table, counting only the table's own entries. */
 function findNameProblems(names: Readonly<Record<string, string>>, contentIds: readonly string[]) {
@@ -37,6 +37,14 @@ describe("language definitions", () => {
         expect(language.label.trim()).not.toBe("");
       });
 
+      test("has a label for every content type, with no blank labels or unknown types", () => {
+        expect(findNameProblems(language.categoryLabels, contentCategories)).toEqual({
+          missing: [],
+          blank: [],
+          unknown: [],
+        });
+      });
+
       for (const category of contentCategories) {
         test(`names every ${category} item, with no blank names or unknown ids`, () => {
           const contentIds = content[category].map((item) => item.id);
@@ -63,6 +71,15 @@ describe("language definitions", () => {
       }
     });
   }
+});
+
+describe("categoryLabel", () => {
+  test("returns the content type's label in the requested language", () => {
+    expect(categoryLabel("es", "cities")).toBe("Ciudades");
+    expect(categoryLabel("en", "cities")).toBe("Cities");
+    expect(categoryLabel("es", "specialTiles")).toBe("Losetas de cielo especiales");
+    expect(categoryLabel("en", "specialTiles")).toBe("Special sky tiles");
+  });
 });
 
 describe("characterTag", () => {

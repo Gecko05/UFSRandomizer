@@ -4,6 +4,13 @@ import type { LanguageDefinition } from "../types";
 // (promo cities translated). Sky tiles are numbered for now.
 export const es: LanguageDefinition = {
   label: "Español",
+  categoryLabels: {
+    cities: "Ciudades",
+    characters: "Personajes",
+    scenarios: "Escenarios",
+    skyTiles: "Losetas de cielo",
+    specialTiles: "Losetas de cielo especiales",
+  },
   contentNames: {
     cities: {
       washington: "Washington",
