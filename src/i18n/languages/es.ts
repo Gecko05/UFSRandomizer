@@ -1,7 +1,7 @@
 import type { LanguageDefinition } from "../types";
 
-// City and character names and character tags are from the Spanish edition (promo
-// cities translated). The other categories are still PLACEHOLDER names.
+// City, character and scenario names and character tags are from the Spanish edition
+// (promo cities translated). Special tiles are still PLACEHOLDER names.
 export const es: LanguageDefinition = {
   label: "Español",
   contentNames: {
@@ -44,9 +44,19 @@ export const es: LanguageDefinition = {
       "wang-lin": "Wang Lin",
     },
     scenarios: {
-      "placeholder-scenario-1": "Escenario de ejemplo 1",
-      "placeholder-scenario-2": "Escenario de ejemplo 2",
-      "placeholder-promo-scenario": "Escenario promocional de ejemplo",
+      "fire-in-the-sky": "Fuego en el cielo",
+      evacuation: "Evacuación",
+      "reactor-leak": "Fuga en el Reactor",
+      reinforcements: "Refuerzos",
+      satellites: "Satélites",
+      "the-saboteur": "El Saboteador",
+      contamination: "Contaminación",
+      "base-repair": "La Reparación de la Base",
+      "a-risky-investigation": "Una Investigación Arriesgada",
+      "the-storm": "La Tormenta",
+      "the-command-ship": "La Nave de Mando",
+      "kamikaze-ships": "Naves Kamikaze",
+      "the-final-battle": "La Batalla Final",
     },
     specialTiles: {
       "placeholder-special-tile-1": "Loseta especial de ejemplo 1",
