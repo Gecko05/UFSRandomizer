@@ -67,7 +67,7 @@ Target setup shape:
 - `src/data/content.ts` — the game's content list (cities, characters, scenarios,
   special tiles, difficulty range). Maintained by hand by the product owner; currently
   placeholder data. Types in `src/data/types.ts`; `content.test.ts` enforces its rules
-  (unique kebab-case ids, non-empty categories, valid difficulty range).
+  (unique kebab-case ids, non-blank names, non-empty categories, valid difficulty range).
 - `src/components/` — React components (e.g. `Footer` with the fan-tool disclaimer).
 - `under-falling-skies-artworks/` — official press-kit artwork, **git-ignored** (157 MB of
   originals). Commit only resized web copies under `src/`.

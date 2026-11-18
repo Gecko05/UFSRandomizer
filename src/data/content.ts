@@ -4,8 +4,8 @@ import type { GameContent } from "./types";
  * The game's content list: everything the randomizer can pick from.
  *
  * Edit this file to match the real game. Rules (checked by content.test.ts):
- * - `id` is lowercase kebab-case and unique within its category. Don't change an
- *   id once released: players' saved selections refer to it.
+ * - `id` is lowercase kebab-case and unique within its category. Keep ids stable:
+ *   code refers to content by id.
  * - `name` is what players see.
  * - `source` is "base" for the base game box, "promo" for promo content.
  * - Every category has at least one item.

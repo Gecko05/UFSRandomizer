@@ -3,7 +3,7 @@ export type ContentSource = "base" | "promo";
 
 /** One selectable item in a content category (a city, a character…). */
 export interface ContentItem {
-  /** Stable identifier, lowercase kebab-case (e.g. "jackson-moss"). Used in saved selections. */
+  /** Stable identifier, lowercase kebab-case (e.g. "jackson-moss"). Must stay stable. */
   id: string;
   /** Display name shown to players. */
   name: string;
