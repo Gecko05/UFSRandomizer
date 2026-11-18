@@ -23,7 +23,7 @@ test("shows every part of the setup and its stars", () => {
   expect(html).toContain("Complexity 10.5");
 });
 
-test("shows a setup without a scenario, on the plain sides", () => {
+test("shows a setup with every tile, city and character on its plain side", () => {
   const html = render(randomSetup(content, () => 0.999));
 
   expect(html).toContain("Berlin · Undamaged");

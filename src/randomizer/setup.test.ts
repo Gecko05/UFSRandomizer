@@ -114,7 +114,7 @@ describe("setupStars", () => {
     expect(stars({ ...plain, character: { id: "wang-lin", upgraded: true } }).yellow).toBe(1);
   });
 
-  test("hardest setup: scenario, 4 flipped special tiles, damaged city, upgraded character", () => {
+  test("4 flipped special tiles, damaged city, upgraded character: without and with a scenario", () => {
     expect(stars(randomSetup(content, always(0)))).toEqual({
       black: 8,
       yellow: 1.5,
