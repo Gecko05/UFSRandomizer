@@ -1,7 +1,7 @@
 import type { ContentCategory } from "../data/types";
 import { en } from "./languages/en";
 import { es } from "./languages/es";
-import type { LanguageDefinition } from "./types";
+import type { LanguageDefinition, SetupPart } from "./types";
 
 /**
  * Registry of supported languages, keyed by language code.
@@ -16,6 +16,11 @@ export const languageCodes = Object.keys(languages) as LanguageCode[];
 
 /** The language the app starts in. */
 export const defaultLanguage: LanguageCode = "en";
+
+/** Heading of a part of a shown setup in the given language (e.g. "Ciudad"). */
+export function setupHeading(language: LanguageCode, part: SetupPart): string {
+  return languages[language].setupHeadings[part];
+}
 
 /** Title of a content type in the given language (e.g. "Ciudades"). */
 export function categoryLabel(language: LanguageCode, category: ContentCategory): string {

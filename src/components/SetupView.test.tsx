@@ -48,3 +48,12 @@ test("shows names in the given language", () => {
   expect(html).toContain("Fuego en el cielo");
   expect(html).toContain("Loseta de cielo especial 1");
 });
+
+test("shows the headings in the given language", () => {
+  const headings = (language: "en" | "es") =>
+    [...render(randomSetup(content, () => 0), language).matchAll(/<dt[^>]*>([^<]+)<\/dt>/g)].map(
+      (match) => match[1],
+    );
+  expect(headings("en")).toEqual(["City", "Character", "Scenario", "Sky"]);
+  expect(headings("es")).toEqual(["Ciudad", "Personaje", "Escenario", "Cielo"]);
+});

@@ -80,10 +80,11 @@ Setup shape (`Setup` in `src/randomizer/setup.ts`):
   `content.test.ts` enforces its rules (unique kebab-case ids, non-empty categories,
   valid tile stars, one special tile per sky tile).
 - `src/i18n/` — languages. `languages/<code>.ts` holds one language's definition (its
-  `label`, a label for each content type, the display names of every content item,
+  `label`, a label for each content type, the singular headings of a shown setup
+  (city, character, scenario, sky), the display names of every content item,
   and each character's regular and upgraded tag, keyed by id); `index.ts` is the
   registry (`languages`, `languageCodes`, `defaultLanguage` = English) and the
-  `categoryLabel(language, category)`,
+  `categoryLabel(language, category)`, `setupHeading(language, part)`,
   `contentName(language, category, id)` and `characterTag(language, id, upgraded)`
   lookups. `index.test.ts` fails if a registered language misses a label, name or tag,
   has a blank one, or uses an id not in the content list.
@@ -110,8 +111,8 @@ Setup shape (`Setup` in `src/randomizer/setup.ts`):
   difficulty range), `ResultView` (the setup, or "No setup fits these choices."),
   `SetupView` (a setup and its stars), `Footer` (language buttons and fan-tool
   disclaimer). `App.tsx` holds the language, the choice, the Randomize button and the
-  result. Content names and content type labels follow the language; other interface
-  text is English only for now.
+  result. Content names, content type labels and setup headings follow the language;
+  other interface text is English only for now.
 - `under-falling-skies-artworks/` — official press-kit artwork, **git-ignored** (157 MB of
   originals). Commit only resized web copies under `src/`.
 

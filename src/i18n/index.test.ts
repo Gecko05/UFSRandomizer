@@ -45,6 +45,15 @@ describe("language definitions", () => {
         });
       });
 
+      test("has a heading for every part of a setup, with none blank", () => {
+        const parts = ["city", "character", "scenario", "sky"];
+        expect(findNameProblems(language.setupHeadings, parts)).toEqual({
+          missing: [],
+          blank: [],
+          unknown: [],
+        });
+      });
+
       for (const category of contentCategories) {
         test(`names every ${category} item, with no blank names or unknown ids`, () => {
           const contentIds = content[category].map((item) => item.id);
