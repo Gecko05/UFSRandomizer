@@ -10,12 +10,11 @@ const render = (setup: Setup, language: "en" | "es" = "en") =>
   );
 
 test("shows every part of the setup and its stars", () => {
-  const setup: Setup = { ...randomSetup(content, () => 0), scenario: "evacuation" };
-  const html = render(setup);
+  const html = render(randomSetup(content, () => 0));
 
   expect(html).toContain("Washington, DC · Damaged");
   expect(html).toContain("Jackson Moss · General (Upgraded)");
-  expect(html).toContain("Evacuation");
+  expect(html).toContain("Fire in the Sky");
   for (const n of [1, 2, 3, 4]) {
     expect(html).toContain(`Special sky tile ${n} · Flipped`);
   }
@@ -32,11 +31,20 @@ test("shows a setup with every tile, city and character on its plain side", () =
   expect(html).toContain("Sky tile 1</li>");
 });
 
+test("shows 'No character' and 'No scenario' when the setup has none", () => {
+  const setup: Setup = { ...randomSetup(content, () => 0), character: null, scenario: null };
+  const html = render(setup);
+
+  expect(html).toContain("No character");
+  expect(html).toContain("No scenario");
+  expect(html).toContain("Black stars 8 · Yellow stars 0.5 ·");
+});
+
 test("shows names in the given language", () => {
   const html = render(randomSetup(content, () => 0), "es");
 
   expect(html).toContain("Washington · Damaged");
   expect(html).toContain("Jackson Moss · General");
-  expect(html).toContain("No scenario");
+  expect(html).toContain("Fuego en el cielo");
   expect(html).toContain("Loseta de cielo especial 1");
 });

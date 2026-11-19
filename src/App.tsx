@@ -5,14 +5,13 @@ import { Footer } from "./components/Footer";
 import { ResultView, type Result } from "./components/ResultView";
 import { content } from "./data/content";
 import type { LanguageCode } from "./i18n";
-import { chooseSetup, type SetupChoice } from "./randomizer/constraints";
+import { chooseSetup, defaultChoice, type SetupChoice } from "./randomizer/constraints";
 
 /** The app starts in English; a language button comes in a later work item. */
 const language: LanguageCode = "en";
 
 export function App() {
-  /** `null` = totally random. */
-  const [choice, setChoice] = useState<SetupChoice | null>(null);
+  const [choice, setChoice] = useState<SetupChoice>(defaultChoice);
   const [result, setResult] = useState<Result | null>(null);
 
   function randomize() {

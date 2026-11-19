@@ -15,7 +15,7 @@ describe("randomSetup", () => {
         flipped: true,
       })),
       character: { id: "jackson-moss", upgraded: true },
-      scenario: null,
+      scenario: "fire-in-the-sky",
     });
   });
 
@@ -38,8 +38,8 @@ describe("randomSetup", () => {
     for (let i = 0; i < 500; i++) {
       const setup = randomSetup(content, Math.random);
       expect(ids(content.cities)).toContain(setup.city.id);
-      expect(ids(content.characters)).toContain(setup.character.id);
-      expect([null, ...ids(content.scenarios)]).toContain(setup.scenario);
+      expect(ids(content.characters)).toContain(setup.character?.id ?? "missing");
+      expect(ids(content.scenarios)).toContain(setup.scenario ?? "missing");
       expect(setup.sky.map((position) => position.skyTileId)).toEqual(ids(content.skyTiles));
       for (const position of setup.sky) {
         const allowed = position.special
@@ -48,6 +48,38 @@ describe("randomSetup", () => {
         expect(ids(allowed)).toContain(position.tileId);
       }
     }
+  });
+
+  describe("options", () => {
+    const options = { characters: true, scenarios: true, specialTiles: true };
+
+    test("characters off: no character", () => {
+      const setup = randomSetup(content, Math.random, { ...options, characters: false });
+      expect(setup.character).toBeNull();
+    });
+
+    test("scenarios off: no scenario", () => {
+      const setup = randomSetup(content, Math.random, { ...options, scenarios: false });
+      expect(setup.scenario).toBeNull();
+    });
+
+    test("special sky tiles off: only plain sky tiles, still flipped at random", () => {
+      // Random 0 would pick every special tile if they were allowed.
+      const setup = randomSetup(content, always(0), { ...options, specialTiles: false });
+      expect(setup.sky.map((position) => [position.tileId, position.special, position.flipped])).toEqual(
+        [1, 2, 3, 4].map((n) => [`sky-tile-${n}`, false, true]),
+      );
+    });
+
+    test("special sky tiles on: each position picks plain or special at random", () => {
+      const kinds = new Set<boolean>();
+      for (let i = 0; i < 100; i++) {
+        for (const position of randomSetup(content, Math.random, options).sky) {
+          kinds.add(position.special);
+        }
+      }
+      expect(kinds).toEqual(new Set([true, false]));
+    });
   });
 
   test("throws when a category it picks from is empty", () => {
@@ -109,20 +141,24 @@ describe("setupStars", () => {
     expect(stars({ ...plain, city: { id: "london", damaged: true } }).yellow).toBe(1);
   });
 
-  test("a character adds 0.5 yellow, 1 if upgraded", () => {
+  test("a character adds 0.5 yellow, 1 if upgraded, nothing if there is none", () => {
     expect(stars(plain).yellow).toBe(0.5);
     expect(stars({ ...plain, character: { id: "wang-lin", upgraded: true } }).yellow).toBe(1);
+    expect(stars({ ...plain, character: null }).yellow).toBe(0);
   });
 
-  test("4 flipped special tiles, damaged city, upgraded character: without and with a scenario", () => {
+  test("no character: difficulty can equal complexity", () => {
+    const setup: Setup = { ...withSky(0, true, true), scenario: "evacuation", character: null };
+    expect(stars(setup)).toEqual({ black: 3, yellow: 0, difficulty: 3, complexity: 3 });
+  });
+
+  test("scenario, 4 flipped special tiles, damaged city, upgraded character: the maximum", () => {
     expect(stars(randomSetup(content, always(0)))).toEqual({
-      black: 8,
+      black: 9,
       yellow: 1.5,
-      difficulty: 6.5,
-      complexity: 9.5,
+      difficulty: 7.5,
+      complexity: 10.5,
     });
-    const full: Setup = { ...randomSetup(content, always(0)), scenario: "evacuation" };
-    expect(stars(full)).toEqual({ black: 9, yellow: 1.5, difficulty: 7.5, complexity: 10.5 });
   });
 
   test("throws for an unknown tile", () => {

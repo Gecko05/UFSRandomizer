@@ -25,12 +25,17 @@ A setup randomizes:
 - **Sky** — for each of the 4 sky tiles: the tile or its special sky tile, and whether
   it is flipped
 - **Character** — and whether it is upgraded
-- **Scenario** — optional
+- **Scenario**
+
+The player toggles characters, scenarios and special sky tiles (`SetupOptions`).
+Characters/scenarios: on = every setup has one, off = none (`null` in the setup).
+Special sky tiles: on = each position picks plain or special at random, off = plain only.
 
 Stars: black stars add difficulty, yellow stars lower it. Difficulty = black − yellow;
 complexity = black + yellow. Scenario: 1 black. Sky tile: 0 black, 1 flipped. Special
 sky tile: 1 black, 2 flipped. Damaged city: 0.5 yellow. Character: 0.5 yellow, 1
-upgraded. Tile stars live in `content.ts`, the others in `src/data/rules.ts`.
+upgraded. No scenario or no character adds nothing. Tile stars live in `content.ts`,
+the others in `src/data/rules.ts`.
 
 Setup shape (`Setup` in `src/randomizer/setup.ts`):
 
@@ -85,23 +90,25 @@ Setup shape (`Setup` in `src/randomizer/setup.ts`):
   and add it to `languages` in `index.ts`.
 - `src/data/rules.ts` — star rules that aren't per item (scenario, damaged city,
   character).
-- `src/randomizer/setup.ts` — pure functions: `randomSetup(content, random)` builds a
-  setup from a random source (`Math.random` in the app, fixed values in tests);
-  `setupStars(setup, content)` counts its stars, difficulty and complexity.
-- `src/randomizer/constraints.ts` — player choices on top of the randomizer:
-  - `possibleStars(content)`: every black/yellow star combination a setup can have.
-  - `complexityOptions(content)` and `difficultyOptions(content, complexity)`: what the
-    player can pick (difficulty from the lowest possible up to the complexity).
-  - `findRandomSetup(content, random, fits)`: returns `null` at once if no star
-    combination fits; otherwise draws random setups until one fits, so every fitting
-    setup is equally likely.
-  - `chooseSetup(content, random, choice)`: a setup for a `SetupChoice` (exact
-    complexity + difficulty range), or totally random when `choice` is `null`.
-- `src/components/` — React components: `ChoicePicker` (complexity: "Totally random" or
-  an exact value; then a difficulty range), `ResultView` (the setup, or "No setup fits
-  these choices."), `SetupView` (a setup and its stars), `Footer` (fan-tool
-  disclaimer). `App.tsx` holds the choice, the Randomize button and the result.
-  Interface text is English only for now.
+- `src/randomizer/setup.ts` — pure functions: `randomSetup(content, random, options)`
+  builds a setup from a random source (`Math.random` in the app, fixed values in
+  tests) and the player's `SetupOptions`; `setupStars(setup, content)` counts its
+  stars, difficulty and complexity.
+- `src/randomizer/constraints.ts` — player choices on top of the randomizer. All take
+  the `SetupOptions`:
+  - `possibleStars`: every black/yellow star combination a setup can have.
+  - `complexityOptions` and `difficultyOptions`: what the player can pick (difficulty
+    from the lowest possible up to the complexity).
+  - `findRandomSetup`: returns `null` at once if no star combination fits; otherwise
+    draws random setups until one fits, so every fitting setup is equally likely.
+  - `chooseSetup(content, random, choice)`: a setup for a `SetupChoice` (options plus
+    a `StarTarget` of exact complexity and difficulty range, or `null` target for
+    "Totally random"). `withOptions` updates a choice when a toggle changes.
+- `src/components/` — React components: `ChoicePicker` (the three toggles; complexity:
+  "Totally random" or an exact value; then a difficulty range), `ResultView` (the
+  setup, or "No setup fits these choices."), `SetupView` (a setup and its stars),
+  `Footer` (fan-tool disclaimer). `App.tsx` holds the choice, the Randomize button and
+  the result. Interface text is English only for now.
 - `under-falling-skies-artworks/` — official press-kit artwork, **git-ignored** (157 MB of
   originals). Commit only resized web copies under `src/`.
 

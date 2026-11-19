@@ -1,40 +1,67 @@
 import type { GameContent } from "../data/types";
-import { complexityOptions, difficultyOptions, type SetupChoice } from "../randomizer/constraints";
+import {
+  complexityOptions,
+  difficultyOptions,
+  fullTarget,
+  withOptions,
+  type SetupChoice,
+  type StarTarget,
+} from "../randomizer/constraints";
+import type { SetupOptions } from "../randomizer/setup";
 
 interface ChoicePickerProps {
   content: GameContent;
-  /** `null` = totally random. */
-  choice: SetupChoice | null;
-  onChange: (choice: SetupChoice | null) => void;
+  choice: SetupChoice;
+  onChange: (choice: SetupChoice) => void;
 }
 
 const selectClass = "rounded bg-neutral-800 px-2 py-1";
 
-/** A full difficulty range for a complexity: every difficulty a player may pick. */
-export function fullChoice(content: GameContent, complexity: number): SetupChoice {
-  const options = difficultyOptions(content, complexity);
-  return { complexity, difficulty: { min: options[0] ?? complexity, max: complexity } };
-}
+const toggles: { key: keyof SetupOptions; label: string }[] = [
+  { key: "characters", label: "Characters" },
+  { key: "scenarios", label: "Scenarios" },
+  { key: "specialTiles", label: "Special sky tiles" },
+];
 
 // Interface text is English only for now; translating it is a later work item.
 export function ChoicePicker({ content, choice, onChange }: ChoicePickerProps) {
-  const difficulties = choice === null ? [] : difficultyOptions(content, choice.complexity);
+  const { options, target } = choice;
+  const setTarget = (newTarget: StarTarget | null) => onChange({ options, target: newTarget });
+  const difficulties = target === null ? [] : difficultyOptions(content, options, target.complexity);
 
   return (
     <div className="flex flex-col items-center gap-3">
+      <fieldset className="flex flex-wrap justify-center gap-4">
+        <legend className="sr-only">Use in setups</legend>
+        {toggles.map(({ key, label }) => (
+          <label key={key} className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={options[key]}
+              onChange={(event) =>
+                onChange(withOptions(content, choice, { ...options, [key]: event.target.checked }))
+              }
+            />
+            {label}
+          </label>
+        ))}
+      </fieldset>
+
       <label className="flex items-center gap-2">
         Complexity
         <select
           className={selectClass}
-          value={choice?.complexity ?? "random"}
+          value={target?.complexity ?? "random"}
           onChange={(event) =>
-            onChange(
-              event.target.value === "random" ? null : fullChoice(content, Number(event.target.value)),
+            setTarget(
+              event.target.value === "random"
+                ? null
+                : fullTarget(content, options, Number(event.target.value)),
             )
           }
         >
           <option value="random">Totally random</option>
-          {complexityOptions(content).map((value) => (
+          {complexityOptions(content, options).map((value) => (
             <option key={value} value={value}>
               {value}
             </option>
@@ -42,22 +69,22 @@ export function ChoicePicker({ content, choice, onChange }: ChoicePickerProps) {
         </select>
       </label>
 
-      {choice !== null && (
+      {target !== null && (
         <div className="flex items-center gap-2">
           <label className="flex items-center gap-2">
             Difficulty from
             <select
               className={selectClass}
-              value={choice.difficulty.min}
+              value={target.difficulty.min}
               onChange={(event) =>
-                onChange({
-                  ...choice,
-                  difficulty: { ...choice.difficulty, min: Number(event.target.value) },
+                setTarget({
+                  ...target,
+                  difficulty: { ...target.difficulty, min: Number(event.target.value) },
                 })
               }
             >
               {difficulties
-                .filter((value) => value <= choice.difficulty.max)
+                .filter((value) => value <= target.difficulty.max)
                 .map((value) => (
                   <option key={value} value={value}>
                     {value}
@@ -69,16 +96,16 @@ export function ChoicePicker({ content, choice, onChange }: ChoicePickerProps) {
             to
             <select
               className={selectClass}
-              value={choice.difficulty.max}
+              value={target.difficulty.max}
               onChange={(event) =>
-                onChange({
-                  ...choice,
-                  difficulty: { ...choice.difficulty, max: Number(event.target.value) },
+                setTarget({
+                  ...target,
+                  difficulty: { ...target.difficulty, max: Number(event.target.value) },
                 })
               }
             >
               {difficulties
-                .filter((value) => value >= choice.difficulty.min)
+                .filter((value) => value >= target.difficulty.min)
                 .map((value) => (
                   <option key={value} value={value}>
                     {value}
