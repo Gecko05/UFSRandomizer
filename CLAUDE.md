@@ -79,33 +79,20 @@ Setup shape (`Setup` in `src/randomizer/setup.ts`):
   tile). Maintained by hand by the product owner. Types in `src/data/types.ts`;
   `content.test.ts` enforces its rules (unique kebab-case ids, non-empty categories,
   valid tile stars, one special tile per sky tile).
-- `src/i18n/` — languages. `languages/<code>.ts` holds one language's definition (its
-  `label`, a label for each content type, the singular headings of a shown setup
-  (city, character, scenario, sky), the display names of every content item,
-  and each character's regular and upgraded tag, keyed by id); `index.ts` is the
-  registry (`languages`, `languageCodes`, `defaultLanguage` = English) and the
-  `categoryLabel(language, category)`, `setupHeading(language, part)`,
-  `contentName(language, category, id)` and `characterTag(language, id, upgraded)`
-  lookups. `index.test.ts` fails if a registered language misses a label, name or tag,
-  has a blank one, or uses an id not in the content list.
+- `src/i18n/` — languages. `languages/<code>.ts` is one language's text (its own name,
+  content type labels, setup headings, content names, character tags); `index.ts` is
+  the registry (English is the default) and the lookups. `index.test.ts` fails if a
+  language misses or blanks any text, or names an unknown id.
   **To add a language:** copy `languages/en.ts` to `languages/<code>.ts`, translate it,
   and add it to `languages` in `index.ts`. The footer's language buttons pick it up.
 - `src/data/rules.ts` — star rules that aren't per item (scenario, damaged city,
   character).
-- `src/randomizer/setup.ts` — pure functions: `randomSetup(content, random, options)`
-  builds a setup from a random source (`Math.random` in the app, fixed values in
-  tests) and the player's `SetupOptions`; `setupStars(setup, content)` counts its
-  stars, difficulty and complexity.
-- `src/randomizer/constraints.ts` — player choices on top of the randomizer. All take
-  the `SetupOptions`:
-  - `possibleStars`: every black/yellow star combination a setup can have.
-  - `complexityOptions` and `difficultyOptions`: what the player can pick (difficulty
-    from the lowest possible up to the complexity).
-  - `findRandomSetup`: returns `null` at once if no star combination fits; otherwise
-    draws random setups until one fits, so every fitting setup is equally likely.
-  - `chooseSetup(content, random, choice)`: a setup for a `SetupChoice` (options plus
-    a `StarTarget` of exact complexity and difficulty range, or `null` target for
-    "Totally random"). `withOptions` updates a choice when a toggle changes.
+- `src/randomizer/setup.ts` — builds a random setup from the content, a random source
+  and the player's `SetupOptions`, and counts its stars.
+- `src/randomizer/constraints.ts` — the player's choices on top of that: which
+  complexities and difficulties are possible, and finding a setup that fits. It
+  checks `possibleStars` first, so "no fit" is instant, then draws random setups until
+  one fits, so every fitting setup is equally likely.
 - `src/components/` — React components: `ChoicePicker` (the three toggles, named with
   the content type labels; complexity: "Totally random" or an exact value; then a
   difficulty range), `ResultView` (the setup, or "No setup fits these choices."),
@@ -125,6 +112,8 @@ Randomization runs entirely client-side. There is no backend logic yet.
 - Game data (cities, characters, scenarios…) lives in typed constant modules, not
   inside components.
 - Tests sit next to the code as `*.test.ts(x)` and use `bun:test`.
+- When content matches a table in an issue, tests compare the exact ids and values,
+  not just counts.
 - Style with Tailwind utility classes. Avoid custom CSS unless it is needed.
 
 ## Decisions
