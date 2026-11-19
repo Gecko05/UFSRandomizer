@@ -82,12 +82,13 @@ Setup shape (`Setup` in `src/randomizer/setup.ts`):
 - `src/i18n/` — languages. `languages/<code>.ts` holds one language's definition (its
   `label`, a label for each content type, the display names of every content item,
   and each character's regular and upgraded tag, keyed by id); `index.ts` is the
-  registry (`languages`) and the `categoryLabel(language, category)`,
+  registry (`languages`, `languageCodes`, `defaultLanguage` = English) and the
+  `categoryLabel(language, category)`,
   `contentName(language, category, id)` and `characterTag(language, id, upgraded)`
   lookups. `index.test.ts` fails if a registered language misses a label, name or tag,
   has a blank one, or uses an id not in the content list.
   **To add a language:** copy `languages/en.ts` to `languages/<code>.ts`, translate it,
-  and add it to `languages` in `index.ts`.
+  and add it to `languages` in `index.ts`. The footer's language buttons pick it up.
 - `src/data/rules.ts` — star rules that aren't per item (scenario, damaged city,
   character).
 - `src/randomizer/setup.ts` — pure functions: `randomSetup(content, random, options)`
@@ -104,11 +105,13 @@ Setup shape (`Setup` in `src/randomizer/setup.ts`):
   - `chooseSetup(content, random, choice)`: a setup for a `SetupChoice` (options plus
     a `StarTarget` of exact complexity and difficulty range, or `null` target for
     "Totally random"). `withOptions` updates a choice when a toggle changes.
-- `src/components/` — React components: `ChoicePicker` (the three toggles; complexity:
-  "Totally random" or an exact value; then a difficulty range), `ResultView` (the
-  setup, or "No setup fits these choices."), `SetupView` (a setup and its stars),
-  `Footer` (fan-tool disclaimer). `App.tsx` holds the choice, the Randomize button and
-  the result. Interface text is English only for now.
+- `src/components/` — React components: `ChoicePicker` (the three toggles, named with
+  the content type labels; complexity: "Totally random" or an exact value; then a
+  difficulty range), `ResultView` (the setup, or "No setup fits these choices."),
+  `SetupView` (a setup and its stars), `Footer` (language buttons and fan-tool
+  disclaimer). `App.tsx` holds the language, the choice, the Randomize button and the
+  result. Content names and content type labels follow the language; other interface
+  text is English only for now.
 - `under-falling-skies-artworks/` — official press-kit artwork, **git-ignored** (157 MB of
   originals). Commit only resized web copies under `src/`.
 

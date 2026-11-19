@@ -8,6 +8,12 @@ test("starts with the Randomize button and no setup yet", () => {
   expect(html).not.toContain('aria-label="Setup"');
 });
 
+test("starts in English", () => {
+  const html = renderToStaticMarkup(<App />);
+  expect(html).toMatch(/lang="en" aria-pressed="true"[^>]*>English</);
+  expect(html).toContain("/>Characters");
+});
+
 test("starts with every toggle on, 'Totally random', and complexity 1.5 to 10.5", () => {
   const html = renderToStaticMarkup(<App />);
   expect(html.match(/<input type="checkbox" checked=""\/>/g)?.length).toBe(3);

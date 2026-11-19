@@ -11,6 +11,12 @@ export const languages = { en, es } satisfies Record<string, LanguageDefinition>
 
 export type LanguageCode = keyof typeof languages;
 
+/** Every registered language code, in registry order. */
+export const languageCodes = Object.keys(languages) as LanguageCode[];
+
+/** The language the app starts in. */
+export const defaultLanguage: LanguageCode = "en";
+
 /** Title of a content type in the given language (e.g. "Ciudades"). */
 export function categoryLabel(language: LanguageCode, category: ContentCategory): string {
   return languages[language].categoryLabels[category];
