@@ -54,13 +54,15 @@ describe("randomSetup", () => {
     const options = { characters: true, scenarios: true, specialTiles: true };
 
     test("characters off: no character", () => {
-      const setup = randomSetup(content, Math.random, { ...options, characters: false });
-      expect(setup.character).toBeNull();
+      for (const random of [always(0), always(0.999)]) {
+        expect(randomSetup(content, random, { ...options, characters: false }).character).toBeNull();
+      }
     });
 
     test("scenarios off: no scenario", () => {
-      const setup = randomSetup(content, Math.random, { ...options, scenarios: false });
-      expect(setup.scenario).toBeNull();
+      for (const random of [always(0), always(0.999)]) {
+        expect(randomSetup(content, random, { ...options, scenarios: false }).scenario).toBeNull();
+      }
     });
 
     test("special sky tiles off: only plain sky tiles, still flipped at random", () => {
@@ -72,13 +74,10 @@ describe("randomSetup", () => {
     });
 
     test("special sky tiles on: each position picks plain or special at random", () => {
-      const kinds = new Set<boolean>();
-      for (let i = 0; i < 100; i++) {
-        for (const position of randomSetup(content, Math.random, options).sky) {
-          kinds.add(position.special);
-        }
-      }
-      expect(kinds).toEqual(new Set([true, false]));
+      const special = (random: () => number) =>
+        randomSetup(content, random, options).sky.map((position) => position.special);
+      expect(special(always(0))).toEqual([true, true, true, true]);
+      expect(special(always(0.999))).toEqual([false, false, false, false]);
     });
   });
 
