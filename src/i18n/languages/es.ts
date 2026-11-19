@@ -11,6 +11,12 @@ export const es: LanguageDefinition = {
     skyTiles: "Losetas de cielo",
     specialTiles: "Losetas de cielo especiales",
   },
+  setupHeadings: {
+    city: "Ciudad",
+    character: "Personaje",
+    scenario: "Escenario",
+    sky: "Cielo",
+  },
   contentNames: {
     cities: {
       washington: "Washington",

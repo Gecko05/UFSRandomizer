@@ -1,4 +1,5 @@
-import type { GameContent } from "../data/types";
+import type { ContentCategory, GameContent } from "../data/types";
+import { categoryLabel, type LanguageCode } from "../i18n";
 import {
   complexityOptions,
   difficultyOptions,
@@ -12,19 +13,18 @@ import type { SetupOptions } from "../randomizer/setup";
 interface ChoicePickerProps {
   content: GameContent;
   choice: SetupChoice;
+  /** For the toggle labels, which are content type labels. */
+  language: LanguageCode;
   onChange: (choice: SetupChoice) => void;
 }
 
 const selectClass = "rounded bg-neutral-800 px-2 py-1";
 
-const toggles: { key: keyof SetupOptions; label: string }[] = [
-  { key: "characters", label: "Characters" },
-  { key: "scenarios", label: "Scenarios" },
-  { key: "specialTiles", label: "Special sky tiles" },
-];
+/** Each toggle is named after the content type it turns on or off. */
+const toggles: (keyof SetupOptions & ContentCategory)[] = ["characters", "scenarios", "specialTiles"];
 
-// Interface text is English only for now; translating it is a later work item.
-export function ChoicePicker({ content, choice, onChange }: ChoicePickerProps) {
+// Other interface text is English only for now; translating it is a later work item.
+export function ChoicePicker({ content, choice, language, onChange }: ChoicePickerProps) {
   const { options, target } = choice;
   const setTarget = (newTarget: StarTarget | null) => onChange({ options, target: newTarget });
   const difficulties = target === null ? [] : difficultyOptions(content, options, target.complexity);
@@ -33,7 +33,7 @@ export function ChoicePicker({ content, choice, onChange }: ChoicePickerProps) {
     <div className="flex flex-col items-center gap-3">
       <fieldset className="flex flex-wrap justify-center gap-4">
         <legend className="sr-only">Use in setups</legend>
-        {toggles.map(({ key, label }) => (
+        {toggles.map((key) => (
           <label key={key} className="flex items-center gap-2">
             <input
               type="checkbox"
@@ -42,7 +42,7 @@ export function ChoicePicker({ content, choice, onChange }: ChoicePickerProps) {
                 onChange(withOptions(content, choice, { ...options, [key]: event.target.checked }))
               }
             />
-            {label}
+            {categoryLabel(language, key)}
           </label>
         ))}
       </fieldset>

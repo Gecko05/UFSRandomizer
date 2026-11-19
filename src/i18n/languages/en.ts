@@ -12,6 +12,12 @@ export const en: LanguageDefinition = {
     skyTiles: "Sky tiles",
     specialTiles: "Special sky tiles",
   },
+  setupHeadings: {
+    city: "City",
+    character: "Character",
+    scenario: "Scenario",
+    sky: "Sky",
+  },
   contentNames: {
     cities: {
       washington: "Washington, DC",

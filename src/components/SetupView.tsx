@@ -1,4 +1,4 @@
-import { characterTag, contentName, type LanguageCode } from "../i18n";
+import { characterTag, contentName, setupHeading, type LanguageCode } from "../i18n";
 import type { Setup, SetupStars } from "../randomizer/setup";
 
 interface SetupViewProps {
@@ -7,19 +7,19 @@ interface SetupViewProps {
   language: LanguageCode;
 }
 
-// Interface text is English only for now; translating it is a later work item.
+// Headings and content follow the language; other interface text is English only for now.
 export function SetupView({ setup, stars, language }: SetupViewProps) {
   const { city, sky, character, scenario } = setup;
 
   return (
     <section aria-label="Setup" className="w-full max-w-md rounded-lg bg-white/5 p-6 text-left">
       <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
-        <dt className="text-white/60">City</dt>
+        <dt className="text-white/60">{setupHeading(language, "city")}</dt>
         <dd>
           {contentName(language, "cities", city.id)} · {city.damaged ? "Damaged" : "Undamaged"}
         </dd>
 
-        <dt className="text-white/60">Character</dt>
+        <dt className="text-white/60">{setupHeading(language, "character")}</dt>
         <dd>
           {character === null ? (
             "No character"
@@ -32,10 +32,10 @@ export function SetupView({ setup, stars, language }: SetupViewProps) {
           )}
         </dd>
 
-        <dt className="text-white/60">Scenario</dt>
+        <dt className="text-white/60">{setupHeading(language, "scenario")}</dt>
         <dd>{scenario === null ? "No scenario" : contentName(language, "scenarios", scenario)}</dd>
 
-        <dt className="text-white/60">Sky</dt>
+        <dt className="text-white/60">{setupHeading(language, "sky")}</dt>
         <dd>
           <ol>
             {sky.map((position) => (

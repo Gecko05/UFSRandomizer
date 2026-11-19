@@ -1,12 +1,15 @@
 import { describe, expect, test } from "bun:test";
 import { renderToStaticMarkup } from "react-dom/server";
 import { content } from "../data/content";
+import type { LanguageCode } from "../i18n";
 import { defaultChoice, fullTarget, type SetupChoice } from "../randomizer/constraints";
 import { allOptionsOn } from "../randomizer/setup";
 import { ChoicePicker } from "./ChoicePicker";
 
-const render = (choice: SetupChoice) =>
-  renderToStaticMarkup(<ChoicePicker content={content} choice={choice} onChange={() => {}} />);
+const render = (choice: SetupChoice, language: LanguageCode = "en") =>
+  renderToStaticMarkup(
+    <ChoicePicker content={content} choice={choice} language={language} onChange={() => {}} />,
+  );
 
 /** The option values of the select inside the label with this text. */
 function optionsAfter(html: string, label: string): string[] {
@@ -19,6 +22,13 @@ describe("ChoicePicker", () => {
   test("shows the three toggles, all on by default", () => {
     const html = render(defaultChoice);
     for (const label of ["Characters", "Scenarios", "Special sky tiles"]) {
+      expect(html).toContain(`<input type="checkbox" checked=""/>${label}`);
+    }
+  });
+
+  test("names the toggles with the content type labels of the chosen language", () => {
+    const html = render(defaultChoice, "es");
+    for (const label of ["Personajes", "Escenarios", "Losetas de cielo especiales"]) {
       expect(html).toContain(`<input type="checkbox" checked=""/>${label}`);
     }
   });
