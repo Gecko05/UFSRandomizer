@@ -8,10 +8,11 @@ test("starts with the Randomize button and no setup yet", () => {
   expect(html).not.toContain('aria-label="Setup"');
 });
 
-test("offers 'Totally random' (selected) and every complexity from 0.5 to 10.5", () => {
+test("starts with every toggle on, 'Totally random', and complexity 1.5 to 10.5", () => {
   const html = renderToStaticMarkup(<App />);
+  expect(html.match(/<input type="checkbox" checked=""\/>/g)?.length).toBe(3);
   expect(html).toContain('<option value="random" selected="">Totally random</option>');
-  expect(html).toContain('<option value="0.5">0.5</option>');
+  expect(html).toContain('<option value="1.5">1.5</option>');
   expect(html).toContain('<option value="10.5">10.5</option>');
-  expect(html.match(/<option /g)?.length).toBe(22);
+  expect(html.match(/<option /g)?.length).toBe(20);
 });

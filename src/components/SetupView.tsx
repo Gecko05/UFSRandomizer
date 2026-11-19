@@ -21,9 +21,15 @@ export function SetupView({ setup, stars, language }: SetupViewProps) {
 
         <dt className="text-white/60">Character</dt>
         <dd>
-          {contentName(language, "characters", character.id)} ·{" "}
-          {characterTag(language, character.id, character.upgraded)}{" "}
-          ({character.upgraded ? "Upgraded" : "Regular"})
+          {character === null ? (
+            "No character"
+          ) : (
+            <>
+              {contentName(language, "characters", character.id)} ·{" "}
+              {characterTag(language, character.id, character.upgraded)}{" "}
+              ({character.upgraded ? "Upgraded" : "Regular"})
+            </>
+          )}
         </dd>
 
         <dt className="text-white/60">Scenario</dt>
