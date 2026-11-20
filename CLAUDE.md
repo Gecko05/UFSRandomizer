@@ -112,6 +112,11 @@ Randomization runs entirely client-side. There is no backend logic yet.
 - Game data (cities, characters, scenarios…) lives in typed constant modules, not
   inside components.
 - Tests sit next to the code as `*.test.ts(x)` and use `bun:test`.
+- **Click tests** use Testing Library on a happy-dom DOM, which `test-setup.ts` loads
+  before every test (via `bunfig.toml`) and cleans up after each one. `render(<App />)`,
+  find elements by role and name (`screen.getByRole("button", { name: "Randomize" })`),
+  then `fireEvent.click`. Make randomness fixed with `spyOn(Math, "random")` and
+  restore it in `afterAll`. Example: `src/App.click.test.tsx`.
 - When content matches a table in an issue, tests compare the exact ids and values,
   not just counts.
 - Style with Tailwind utility classes. Avoid custom CSS unless it is needed.
